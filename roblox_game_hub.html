@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Keeper [BETA] | Official Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        gamer: {
+                            dark: '#0f172a',
+                            panel: '#1e293b',
+                            accent1: '#f43f5e', // Rose/Fire Red
+                            accent2: '#fb923c', // Orange/Lava
+                            common: '#4ade80', // Green
+                            rare: '#3b82f6',   // Blue
+                            epic: '#a855f7',   // Purple
+                            legendary: '#eab308', // Gold
+                            mythical: '#ec4899' // Pink/Magenta
+                        }
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 1, textShadow: '0 0 10px #f43f5e' },
+                            '50%': { opacity: .7, textShadow: '0 0 20px #f43f5e' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0f172a; color: white; }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #f43f5e, #fb923c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .tooltip-card {
+            display: none;
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            width: max-content;
+        }
+        .pet-item:hover .tooltip-card {
+            display: block;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #f43f5e; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #fb923c; }
+    </style>
+</head>
+<body class="antialiased selection:bg-gamer-accent2 selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-panel border-b-0 py-4 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-black text-gradient uppercase tracking-wider">
+                <i class="fa-solid fa-dragon mr-2 text-gamer-accent1"></i>Dragon Keeper <span class="text-xs text-gray-400 align-top">[BETA]</span>
+            </div>
+            <div class="hidden md:flex space-x-6 font-semibold">
+                <a href="#updates" class="hover:text-gamer-accent1 transition-colors">Updates</a>
+                <a href="#eggs" class="hover:text-gamer-accent1 transition-colors">Egg Chances</a>
+                <a href="#codes" class="hover:text-gamer-accent1 transition-colors">Promo Codes</a>
+            </div>
+            <a href="#play" class="bg-gradient-to-r from-gamer-accent1 to-gamer-accent2 px-6 py-2 rounded-full font-bold shadow-[0_0_15px_rgba(244,63,94,0.5)] hover:scale-105 transition-transform text-white">
+                Play Now
+            </a>
+        </div>
+    </nav>
+
+    <!-- Updates & News Hub (Hero) -->
+    <section id="updates" class="pt-32 pb-20 px-6 relative overflow-hidden">
+        <!-- Decorative bg blur -->
+        <div class="absolute top-20 left-1/4 w-96 h-96 bg-gamer-accent1 opacity-20 rounded-full blur-[100px] -z-10"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-gamer-accent2 opacity-20 rounded-full blur-[100px] -z-10"></div>
+
+        <div class="max-w-7xl mx-auto">
+            <!-- Hero Banner -->
+            <div class="relative rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(244,63,94,0.3)] border border-gamer-accent1/30">
+                <img src="https://placehold.co/1200x400/1e293b/f43f5e?text=THE+VOLCANIC+AWAKENING" alt="Volcanic Update Banner" class="w-full h-64 md:h-96 object-cover opacity-80">
+                <div class="absolute inset-0 bg-gradient-to-t from-gamer-dark to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-8">
+                    <span class="bg-gamer-accent1 text-white px-3 py-1 rounded-full text-sm font-bold uppercase tracking-widest mb-4 inline-block shadow-lg">Latest Update</span>
+                    <h1 class="text-4xl md:text-6xl font-black mb-2 text-white drop-shadow-lg">The Volcanic Awakening</h1>
+                    <p class="text-gray-300 md:text-xl max-w-2xl">Discover 3 new Fire-type Dragons, hatch the exclusive Magma Egg, and conquer the new Volcano zone!</p>
+                </div>
+            </div>
+
+            <!-- Countdown & Changelog -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12">
+                <!-- Countdown Timer -->
+                <div class="glass-panel p-8 rounded-2xl text-center border border-gamer-accent2/30 lg:col-span-1 flex flex-col justify-center shadow-[0_0_20px_rgba(251,146,60,0.15)]">
+                    <h3 class="text-xl font-bold text-gamer-accent2 mb-6 uppercase tracking-wider"><i class="fa-solid fa-clock mr-2"></i>Next Weekend Update</h3>
+                    <div class="grid grid-cols-4 gap-2 text-center" id="countdown">
+                        <div class="bg-gamer-dark p-3 rounded-lg"><span class="text-3xl font-black" id="days">00</span><p class="text-xs text-gray-400 mt-1">DAYS</p></div>
+                        <div class="bg-gamer-dark p-3 rounded-lg"><span class="text-3xl font-black" id="hours">00</span><p class="text-xs text-gray-400 mt-1">HRS</p></div>
+                        <div class="bg-gamer-dark p-3 rounded-lg"><span class="text-3xl font-black" id="minutes">00</span><p class="text-xs text-gray-400 mt-1">MIN</p></div>
+                        <div class="bg-gamer-dark p-3 rounded-lg"><span class="text-3xl font-black text-gamer-accent1 animate-pulse-glow" id="seconds">00</span><p class="text-xs text-gray-400 mt-1">SEC</p></div>
+                    </div>
+                </div>
+
+                <!-- Changelog -->
+                <div class="lg:col-span-2 glass-panel p-8 rounded-2xl border border-gray-700">
+                    <h3 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-2"><i class="fa-solid fa-list mr-2 text-gamer-accent1"></i>Patch Notes - Update 1</h3>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="flex items-start"><i class="fa-solid fa-check text-green-400 mt-1 mr-3"></i> <span>Added 3 new Fire-type Dragons to the game.</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-green-400 mt-1 mr-3"></i> <span>New <strong>Magma Egg</strong> available in the starting shop.</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-bug-slash text-blue-400 mt-1 mr-3"></i> <span>Bug fixes for the flying mechanics and camera stuttering.</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-arrow-up text-purple-400 mt-1 mr-3"></i> <span>Max rebirths increased from 5 to 10.</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Egg Chances Section -->
+    <section id="eggs" class="py-20 px-6 bg-gamer-dark/50 border-y border-gray-800">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-black text-center mb-12 text-gradient">Egg & Pet Drop Chances</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+                
+                <!-- Starter Egg -->
+                <div class="glass-panel rounded-2xl overflow-visible p-6 border-t-4 border-gray-400 relative hover:-translate-y-2 transition-transform duration-300">
+                    <div class="text-center mb-6">
+                        <div class="w-24 h-24 mx-auto bg-gray-700 rounded-full border-4 border-gray-500 flex items-center justify-center mb-4 shadow-lg">
+                            <i class="fa-solid fa-egg text-4xl text-gray-300"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Starter Egg</h3>
+                        <p class="text-yellow-400 font-semibold mt-1"><i class="fa-solid fa-coins mr-1"></i> 500 Coins</p>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <!-- Common -->
+                        <div class="pet-item relative flex justify-between items-center bg-gray-800/50 p-3 rounded-lg border border-gamer-common/30 cursor-help transition hover:bg-gray-700">
+                            <div class="flex items-center"><i class="fa-solid fa-dragon text-gamer-common mr-3 text-xl"></i><span class="font-semibold text-gray-200">Green Dragon</span></div>
+                            <span class="text-gamer-common font-bold bg-gray-900 px-2 py-1 rounded">70%</span>
+                            <div class="tooltip-card glass-panel p-4 rounded-xl border border-gamer-common/50 shadow-2xl">
+                                <h4 class="font-bold text-gamer-common mb-1">Common Rarity</h4>
+                                <p class="text-sm text-gray-300">A basic dragon to start your journey.</p>
+                            </div>
+                        </div>
+
+                        <!-- Rare -->
+                        <div class="pet-item relative flex justify-between items-center bg-gray-800/50 p-3 rounded-lg border border-gamer-rare/30 cursor-help transition hover:bg-gray-700">
+                            <div class="flex items-center"><i class="fa-solid fa-dragon text-gamer-rare mr-3 text-xl"></i><span class="font-semibold text-gray-200">Blue Dragon</span></div>
+                            <span class="text-gamer-rare font-bold bg-gray-900 px-2 py-1 rounded">25%</span>
+                            <div class="tooltip-card glass-panel p-4 rounded-xl border border-gamer-rare/50 shadow-2xl">
+                                <h4 class="font-bold text-gamer-rare mb-1">Rare Rarity</h4>
+                                <p class="text-sm text-gray-300">Faster flight speed than common.</p>
+                            </div>
+                        </div>
+
+                        <!-- Epic -->
+                        <div class="pet-item relative flex justify-between items-center bg-gray-800/50 p-3 rounded-lg border border-gamer-epic/30 cursor-help transition hover:bg-gray-700">
+                            <div class="flex items-center"><i class="fa-solid fa-dragon text-gamer-epic mr-3 text-xl"></i><span class="font-semibold text-gray-200">Red Dragon</span></div>
+                            <span class="text-gamer-epic font-bold bg-gray-900 px-2 py-1 rounded">4.9%</span>
+                            <div class="tooltip-card glass-panel p-4 rounded-xl border border-gamer-epic/50 shadow-2xl">
+                                <h4 class="font-bold text-gamer-epic mb-1">Epic Rarity</h4>
+                                <p class="text-sm text-gray-300">High damage and bright fire breath.</p>
+                            </div>
+                        </div>
+
+                        <!-- Legendary -->
+                        <div class="pet-item relative flex justify-between items-center bg-yellow-900/20 p-3 rounded-lg border border-gamer-legendary/50 cursor-help transition hover:bg-gray-700 shadow-[0_0_10px_rgba(234,179,8,0.1)]">
+                            <div class="flex items-center"><i class="fa-solid fa-dragon text-gamer-legendary mr-3 text-xl drop-shadow-[0_0_5px_rgba(234,179,8,0.8)]"></i><span class="font-bold text-gamer-legendary">Golden Wyvern</span></div>
+                            <span class="text-gamer-legendary font-black bg-gray-900 px-2 py-1 rounded">0.1%</span>
+                            <div class="tooltip-card glass-panel p-4 rounded-xl border border-gamer-legendary/80 shadow-2xl">
+                                <h4 class="font-bold text-gamer-legendary mb-1">Legendary Rarity</h4>
+                                <p class="text-sm text-gray-300">Extremely rare. Emits a golden glow.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Magma Egg -->
+                <div class="glass-panel rounded-2xl overflow-visible p-6 border-t-4 border-gamer-accent1 relative shadow-[0_0_30px_rgba(244,63,94,0.1)] hover:-translate-y-2 transition-transform duration-300">
+                    <div class="text-center mb-6">
+                        <div class="w-24 h-24 mx-auto bg-red-900 rounded-full border-4 border-gamer-accent1 flex items-center justify-center mb-4 shadow-[0_0_20px_rgba(244,63,94,0.5)] animate-pulse-glow">
+                            <i class="fa-solid fa-fire-flame-curved text-4xl text-orange-400"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Magma Egg</h3>
+                        <p class="text-yellow-400 font-semibold mt-1"><i class="fa-solid fa-coins mr-1"></i> 5,000 Coins</p>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <!-- Epic -->
+                        <div class="pet-item relative flex justify-between items-center bg-gray-800/50 p-3 rounded-lg border border-gamer-epic/30 cursor-help transition hover:bg-gray-700">
+                            <div class="flex items-center"><i class="fa-solid fa-dragon text-gamer-epic mr-3 text-xl"></i><span class="font-semibold text-gray-200">Ember Dragon</span></div>
+                            <span class="text-gamer-epic font-bold bg-gray-900 px-2 py-1 rounded">80%</span>
+                            <div class="tooltip-card glass-panel p-4 rounded-xl border border-gamer-epic/50">
+                                <h4 class="font-bold text-gamer-epic mb-1">Epic Rarity</h4>
+                                <p class="text-sm text-gray-300">Leaves a trail of ash when flying.</p>
+                            </div>
+                        </div>
+
+                        <!-- Legendary -->
+                        <div class="pet-item relative flex justify-between items-center bg-yellow-900/20 p-3 rounded-lg border border-gamer-legendary/30 cursor-help transition hover:bg-gray-700">
+                            <div class="flex items-center"><i class="fa-solid fa-dragon text-gamer-legendary mr-3 text-xl"></i><span class="font-bold text-gamer-legendary">Lava Beast</span></div>
+                            <span class="text-gamer-legendary font-black bg-gray-900 px-2 py-1 rounded">19%</span>
+                            <div class="tooltip-card glass-panel p-4 rounded-xl border border-gamer-legendary/80">
+                                <h4 class="font-bold text-gamer-legendary mb-1">Legendary Rarity</h4>
+                                <p class="text-sm text-gray-300">Massive size and high damage stats.</p>
+                            </div>
+                        </div>
+
+                        <!-- Mythical -->
+                        <div class="pet-item relative flex justify-between items-center bg-pink-900/20 p-3 rounded-lg border border-gamer-mythical/50 cursor-help transition hover:bg-pink-900/40 shadow-[0_0_15px_rgba(236,72,153,0.2)]">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-dragon text-gamer-mythical mr-3 text-xl drop-shadow-[0_0_8px_rgba(236,72,153,1)]"></i>
+                                <span class="font-black text-gamer-mythical tracking-wide">Obsidian Dragon</span>
+                            </div>
+                            <span class="text-gamer-mythical font-black bg-black px-2 py-1 rounded border border-gamer-mythical/30">1%</span>
+                            <div class="tooltip-card glass-panel p-4 rounded-xl border-2 border-gamer-mythical shadow-[0_0_30px_rgba(236,72,153,0.5)] text-center">
+                                <h4 class="font-black text-gamer-mythical mb-1">Mythical Rarity</h4>
+                                <p class="text-xs text-gray-300">The rarest dragon in the Volcanic zone!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coming Soon Egg (Placeholder) -->
+                <div class="glass-panel rounded-2xl p-6 border border-dashed border-gray-600 flex flex-col items-center justify-center text-center opacity-60 hover:opacity-100 transition-opacity">
+                    <i class="fa-solid fa-lock text-5xl text-gray-500 mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-400">??? Egg</h3>
+                    <p class="text-sm text-gray-500 mt-2">Unlocks in the next update.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Promo Codes Section -->
+    <section id="codes" class="max-w-4xl mx-auto px-6 py-20">
+        <div class="glass-panel rounded-2xl p-8 md:p-12 border border-gray-700/50 relative overflow-hidden shadow-2xl">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-green-500/10 blur-[80px] -z-10 rounded-full"></div>
+            
+            <div class="text-center mb-10">
+                <h2 class="text-4xl font-black mb-4"><i class="fa-solid fa-ticket text-green-400 mr-3"></i> Active Promo Codes</h2>
+                <p class="text-gray-400 text-lg">Redeem these codes in-game for free coins and exclusive boosts!</p>
+            </div>
+            
+            <div class="space-y-6 max-w-2xl mx-auto">
+                <!-- Code Item 1 -->
+                <div class="bg-gray-900 border border-gray-600 rounded-xl p-6 flex flex-col sm:flex-row justify-between items-center group shadow-lg">
+                    <div class="text-center sm:text-left mb-4 sm:mb-0">
+                        <div class="font-mono text-2xl font-black tracking-widest text-green-400 drop-shadow-md">RELEASE</div>
+                        <div class="text-sm text-gray-400 mt-2"><i class="fa-solid fa-gift mr-1"></i> Reward: 1,000 Free Coins</div>
+                    </div>
+                    <button onclick="copyCode(this, 'RELEASE')" class="w-full sm:w-auto bg-gray-800 hover:bg-green-500 hover:text-black text-white px-6 py-3 rounded-lg font-bold transition-all flex items-center justify-center">
+                        <i class="fa-solid fa-copy mr-2"></i> <span>Copy Code</span>
+                    </button>
+                </div>
+
+                <!-- Code Item 2 -->
+                <div class="bg-gray-900 border border-gray-600 rounded-xl p-6 flex flex-col sm:flex-row justify-between items-center group shadow-lg">
+                    <div class="text-center sm:text-left mb-4 sm:mb-0">
+                        <div class="font-mono text-2xl font-black tracking-widest text-gamer-accent2 drop-shadow-md">BETA_TESTER</div>
+                        <div class="text-sm text-gray-400 mt-2"><i class="fa-solid fa-flask mr-1"></i> Reward: 2x Luck Potion (15 mins)</div>
+                    </div>
+                    <button onclick="copyCode(this, 'BETA_TESTER')" class="w-full sm:w-auto bg-gray-800 hover:bg-gamer-accent2 hover:text-black text-white px-6 py-3 rounded-lg font-bold transition-all flex items-center justify-center">
+                        <i class="fa-solid fa-copy mr-2"></i> <span>Copy Code</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Notification Toast -->
+            <div id="copy-toast" class="fixed bottom-10 right-10 bg-green-500 text-black px-6 py-3 rounded-lg font-bold shadow-xl transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center">
+                <i class="fa-solid fa-circle-check text-xl mr-2"></i> Code Copied to Clipboard!
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#05080f] py-10 text-center border-t border-gray-800 mt-10">
+        <div class="text-2xl font-black text-gray-600 uppercase tracking-wider mb-4">
+            <i class="fa-solid fa-dragon mr-2"></i>Dragon Keeper
+        </div>
+        <p class="text-gray-500 font-medium mb-2">Dragon Keeper [BETA] &copy; 2026. Not affiliated with Roblox Corporation.</p>
+        <p class="text-gray-600 text-sm">Created for the community.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // --- Countdown Timer Logic ---
+        // Set the date to Next Saturday at 12:00 PM
+        const getNextUpdateDate = () => {
+            let d = new Date();
+            d.setDate(d.getDate() + (6 - d.getDay() + 7) % 7); // Next Saturday
+            d.setHours(12, 0, 0, 0);
+            if (d < new Date()) {
+                d.setDate(d.getDate() + 7); // If already passed, target next week
+            }
+            return d.getTime();
+        };
+
+        const countDownDate = getNextUpdateDate();
+
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("countdown").innerHTML = "<div class='col-span-4 text-2xl font-black text-gamer-accent1 animate-pulse'>UPDATE IS LIVE!</div>";
+            }
+        }, 1000);
+
+        // --- Copy to Clipboard Logic ---
+        function copyCode(buttonElement, codeStr) {
+            const textArea = document.createElement("textarea");
+            textArea.value = codeStr;
+            document.body.appendChild(textArea);
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showToast();
+                
+                // Change button state temporarily
+                const originalText = buttonElement.innerHTML;
+                buttonElement.innerHTML = '<i class="fa-solid fa-check mr-2"></i> <span>Copied!</span>';
+                buttonElement.classList.add('bg-green-500', 'text-black');
+                buttonElement.classList.remove('text-white', 'bg-gray-800');
+                
+                setTimeout(() => {
+                    buttonElement.innerHTML = originalText;
+                    buttonElement.classList.remove('bg-green-500', 'text-black');
+                    buttonElement.classList.add('text-white', 'bg-gray-800');
+                }, 2000);
+                
+            } catch (err) {
+                console.error('Failed to copy', err);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function showToast() {
+            const toast = document.getElementById('copy-toast');
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
